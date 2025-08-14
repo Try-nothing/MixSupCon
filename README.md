@@ -111,6 +111,3 @@ python linear_eval.py \
 - **鲁棒性测试** : ImageNet-C 上 mCE 降低 **1.8~2.4** 点
 
 ---
-
-> 本实现已开源：GitHub `easy-VLM/mixsupcon`
-```
