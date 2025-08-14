@@ -17,12 +17,12 @@
 | 负样本对 | 不同样本的增强视图 | 所有不同类别样本 |
 
 **原始损失函数**：
-math
+$$
 \boxed{
 \mathcal{L}=-\frac{1}{\sum_{i=1}^{N}\leftA\left(x_{i}\right)\right
 } \sum_{i=1}^{N} \sum_{j \in A\left(x_{i}\right)} \log \left(\frac{\exp \left(x_{i}^{T} \cdot x_{j} / \tau\right)}{\sum_{k=1}^{N} \sum_{l=1}^{N} \mathbb{I}_{[k \neq l]} \exp \left(x_{k}^{T} \cdot x_{l} / \tau\right)}\right)
 }
-
+$$
 > 其中：  
 > - $A(x_i)$：与$x_i$同类别的样本集合  
 > - $\tau$：温度参数（控制对比强度）  
@@ -32,14 +32,14 @@ math
 ## ⚖️ 二、改进动机：mixup与SCL的互补性  
 
 ### 🔧 2.1 mixup数据增强原理
-math
+$$
 \boxed{
 \begin{aligned}
 &\text{样本混合：} & \tilde{x} &= \lambda x_{i} + (1-\lambda) x_{j} \\
 &\text{标签混合：} & \tilde{y} &= \lambda y_{i} + (1-\lambda) y_{j}
 \end{aligned}
 }
-
+$$
 > $\lambda \sim \text{Beta}(\alpha,\alpha)$，生成**半正样本**（介于两类之间的过渡样本）  
 
 ### 💎 2.2 互补性分析  
@@ -64,7 +64,7 @@ D --> E[混合样本 \{\bar{x}_k, \bar{y}_k\}]
 
 
 ### 🧬 3.2 特征提取与投影  
-math
+$$
 \begin{array}{c}
 \text{编码器} \\
 \downarrow \\
@@ -74,14 +74,14 @@ math
 \downarrow \\
 \boxed{z_k = g(v_k)}
 \end{array}
-
+$$
 
 ### 📐 3.3 改写的损失函数  
-math
+$$
 \boxed{
 \mathcal{L}=-\frac{1}{\sum_{k=1}^{N_{mix}} \Phi\left(y_{k}\right)} \sum_{k=1}^{N_{mix}} \underbrace{\Phi\left(y_{k}\right)}_{\text{标签相似度}} \underbrace{\Psi\left(z_{k}\right)}_{\text{特征相似度}}
 }
-
+$$
 > 其中：  
 > - $\Phi(y_k) = y_k^{T} \cdot y_k$  
 > - $\Psi(z_k) = \log \left(\frac{\exp \left(z_k^{T} \cdot z_k / \tau\right)}{\sum_{i,j}^{} \mathbb{I}_{[i \neq j]} \exp \left(z_k^{T} \cdot z_k / \tau\right)}\right)$
