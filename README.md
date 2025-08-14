@@ -1,4 +1,4 @@
-```markdown
+
 # Supervised Contrastive Learning with Mixup (MixSupCon)
 
 > 基于 [NeurIPS 2020 Supervised Contrastive Learning](https://proceedings.neurips.cc/paper_files/paper/2020/file/d89a66c7c80a29b1bdbab0f2a1a94af8-Paper.pdf) 的改进实现，在训练中引入 **Mixup 数据增强** 并重新设计损失函数，以进一步提升分类性能与鲁棒性。
@@ -20,7 +20,7 @@
 ## 2. 方法概述
 
 ### 2.1 数据流
-```text
+
 原始样本 (x, y)
       │
       ├─ 两次随机增强 → 得到视图 (x̃, y) 和 (x̂, y)
@@ -34,7 +34,7 @@
       ├─ Projection head g(·) 映射 z = g(v)
       │
       └─ MixSupCon Loss 计算对比损失
-```
+
 
 ### 2.2 MixSupCon 损失函数
 
@@ -81,7 +81,7 @@ $$
 
 ## 5. 快速使用
 
-```bash
+
 # 环境
 pip install torch torchvision tensorboard
 
@@ -100,7 +100,7 @@ python pretrain.py \
 python linear_eval.py \
   --ckpt path/to/checkpoint.pth \
   --dataset cifar10
-```
+
 
 ---
 
